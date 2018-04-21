@@ -9,11 +9,11 @@ const io = require('socket.io')(http);
 const port = 3040;
 
 app.options('*', cors());
-app.use(express.static(__dirname, '..', 'public'));
+app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', "index.html"));
-});
+// app.get('/', (req, res) => {
+//   res.end("index")
+// });
 
 io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {

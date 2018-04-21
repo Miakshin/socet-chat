@@ -21326,7 +21326,7 @@ module.exports = camelize;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+      value: true
 });
 
 var _react = __webpack_require__(0);
@@ -21346,15 +21346,11 @@ var _Login2 = _interopRequireDefault(_Login);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(_Chat2.default, null)
-  );
+      return _react2.default.createElement(_Login2.default, null);
 };
 
 exports.default = App;
-
+//
 // <Route exact path="/" component={Login} />
 // <Route path='/login' component={Login} />
 // <Route path='/chat' component={Chat} />
@@ -25379,7 +25375,7 @@ exports = module.exports = __webpack_require__(21)(false);
 
 
 // module
-exports.push([module.i, "main{\n  height: 100vh;\n  width: 100%;\n  background: #3498db;\n  overflow: hidden;\n}\n.login{\n  width: 300px;\n  height: 335px;\n  margin: 100px auto;\n  background-color: #ffffff;\n  border-radius: 5px;\n}\n.login__title{\n  display: block;\n  text-align: center;\n  width: 100%;\n  font-size: 32px;\n  color:#757476;\n  padding: 40px 0px 20px 0px;\n}\n.login__input,\n.login__button{\n  display: block;\n  width: 80%;\n  margin: 20px auto;\n  height: 40px;\n  border-radius: 3px;\n  border: 0px;\n}\n.login__input{\n  background-color: #ecf0f1;\n  color: #b2b1b8;\n  text-align: center;\n}\n.login__button{\n  background-color: #3498db;\n  color: #ffffff;\n}\n.login__hint{\n  display: block;\n  width: 80%;\n  margin: 20px auto;\n  color: #757476;\n  text-align: center;\n}\n.login__reg-link, .login__reg-link:visited{\n  color: #3498db;\n}\n", ""]);
+exports.push([module.i, "main{\n  height: 100vh;\n  width: 100%;\n  background: #3498db;\n  overflow: hidden;\n}\n.login{\n  width: 300px;\n  margin: 100px auto;\n  background-color: #ffffff;\n  border-radius: 5px;\n  position: absolute;\n  left: 50%;\n  transform: translate(-50%,-50%);\n}\n.login__title{\n  display: block;\n  text-align: center;\n  width: 100%;\n  font-size: 32px;\n  color:#757476;\n  padding: 40px 0px 20px 0px;\n}\n.login__input,\n.login__button{\n  display: block;\n  width: 80%;\n  margin: 20px auto;\n  height: 40px;\n  border-radius: 3px;\n  border: 0px;\n}\n.login__input{\n  background-color: #ecf0f1;\n  color: #b2b1b8;\n  text-align: center;\n}\n.login__button{\n  background-color: #3498db;\n  color: #ffffff;\n}\n.login__hint{\n  display: block;\n  width: 80%;\n  margin: 20px auto;\n  color: #757476;\n  text-align: center;\n}\n.login__reg-link, .login__reg-link:visited{\n  color: #3498db;\n}\n", ""]);
 
 // exports
 
@@ -25443,7 +25439,7 @@ exports = module.exports = __webpack_require__(21)(false);
 
 
 // module
-exports.push([module.i, "*{\n  margin: 0;\n  padding: 0;\n  outline: none;\n}\n", ""]);
+exports.push([module.i, "*{\n  margin: 0;\n  padding: 0;\n  outline: none;\n}\nbody{\n  width: 100%;\n}\n", ""]);
 
 // exports
 
