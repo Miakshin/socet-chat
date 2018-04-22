@@ -11,7 +11,7 @@ form input {
   width: 90%;
   margin-right: .5%;
 }
-form button {
+form input[type="button"] {
   width: 9%;
   background: rgb(130, 224, 255);
   border: none;

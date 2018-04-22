@@ -7,8 +7,17 @@ const Chat = () => {
   return(
     <div className="chat">
       <ul id="messages"></ul>
-      <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
+      <form action="" classname="chat__form">
+        <input
+          id="m"
+          autocomplete="off"
+          classname="chat__input"
+        />
+        <input
+          classname="chat__button"
+          type="button"
+          value="send"
+        />
       </form>
     </div>
   )
