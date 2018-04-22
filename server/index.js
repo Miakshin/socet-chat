@@ -11,15 +11,24 @@ const port = 3040;
 app.options('*', cors());
 app.use(express.static('public'));
 
-// app.get('/', (req, res) => {
-//   res.end("index")
-// });
+app.get('/', (req, res) => {
+  res.end("index")
+});
 
 io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
+    console.log(msg)
     io.emit('chat message', msg);
   });
 });
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
 
 http.listen(
   port, '127.0.0.1',

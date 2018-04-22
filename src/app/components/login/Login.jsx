@@ -12,9 +12,7 @@ const Login = (props) => (
       <input className="login__button"
         type="button" value="login"
         onClick={()=>{
-          console.log(props);
           props.history.push("/chat")
-          console.log(props)
         }}
         />
       <p className="login__hint">
