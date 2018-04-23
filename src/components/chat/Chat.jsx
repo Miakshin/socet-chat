@@ -8,7 +8,16 @@ class Chat extends Component {
     super(props);
     this.state = {
       socket: io(),
+      messages: []
     };
+  }
+
+  componentDidMount() {
+    this.state.socket.on('chat message', (msg) => {
+      this.setState(
+        { messages : [ ...this.state.messages , msg] }
+      )
+    });
   }
 
   exit() {
@@ -22,6 +31,13 @@ class Chat extends Component {
   }
 
   render() {
+
+    const messageList = this.state.messages.map((item, i) => {
+      return (
+        <li className="chat__message" key={i}>{item}</li>
+      )
+    })
+
     return (
       <div className="chat">
         <header className="chat__header">
@@ -29,10 +45,12 @@ class Chat extends Component {
             type="button"
             value="exit"
             className="chat__out-btn"
-            onClick={this.exit}
+            onClick={()=>this.exit()}
           />
         </header>
-        <ul className="chat__massages" />
+        <ul className="chat__messages" >
+          {messageList || " "}
+        </ul>
         <form className="mesage-form">
           <input
             type="text"

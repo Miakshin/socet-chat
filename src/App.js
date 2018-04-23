@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Chat from './app/components/chat/Chat.jsx';
-import Login from './app/components/login/Login.jsx';
+import Chat from './components/chat/Chat';
+import Login from './components/login/Login';
 
 const App = () => (
   <div>

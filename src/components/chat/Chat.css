@@ -18,8 +18,6 @@
   border-radius: 3px;
   border: 0px;
 }
-.chat__massages{
-}
 .mesage-form input[type="text"]{
   width: 76%;
   background-color: #ecf0f1;
@@ -46,4 +44,14 @@
   margin: 5px 10px;
   border-radius: 3px;
   border: 0px;
+}
+.chat__message{
+  height: 20px;
+  padding: 5px 0px;
+  display: block;
+  text-indent: 2%;
+  color: #757476;
+}
+.chat__message:nth-child(odd){
+  background-color: #ecf0f1;
 }
