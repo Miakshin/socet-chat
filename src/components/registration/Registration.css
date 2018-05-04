@@ -1,0 +1,69 @@
+.registration{
+  width: 500px;
+  height: 500px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.registration__title{
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 32px;
+  color:#757476;
+  padding: 40px 0px 20px 0px;
+}
+.registration__input,
+.registration__button{
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  height: 40px;
+  border-radius: 3px;
+  border: 0px;
+}
+.registration__input{
+  background-color: #ecf0f1;
+  color: #b2b1b8;
+  text-align: center;
+}
+.registration__create-button{
+  width: 48%;
+  display: block;
+  height: 40px;
+  background-color: #3498db;
+  color: #ffffff;
+  position: absolute;
+  bottom: 20px;
+  left: 10%;
+  border-radius: 3px;
+  border: 0px;
+}
+.registration__create-button:disabled{
+  background-color: #3498db94;
+}
+.registration__to-login-button{
+  width: 28%;
+  display: block;
+  height: 40px;
+  background-color: #dadada;
+  color: #ffffff;
+  position: absolute;
+  bottom: 20px;
+  right: 10%;
+  border-radius: 3px;
+  border: 0px;
+}
+.invalid, .invalidLength{
+  border: 2px solid red;
+  display: block;
+}
+.invalidLength::before{
+  content: "to short";
+  display: block;
+  color: red;
+  z-index: 2;
+}
