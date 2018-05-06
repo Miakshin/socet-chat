@@ -29,6 +29,7 @@
   background-color: #ecf0f1;
   color: #b2b1b8;
   text-align: center;
+  border: 2px solid #ffffff00;
 }
 .registration__create-button{
   width: 48%;
@@ -58,12 +59,19 @@
   border: 0px;
 }
 .invalid, .invalidLength{
-  border: 2px solid red;
+  border: 2px solid #f3c6c6;
   display: block;
+}
+.registration__input.valid{
+  border: 2px solid #cbfbcb;
 }
 .invalidLength::before{
   content: "to short";
   display: block;
   color: red;
   z-index: 2;
+}
+.registration__pass-err-test{
+  color: #e84124;
+  text-align: center;
 }

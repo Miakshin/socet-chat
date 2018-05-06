@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { printErr } from '../../common/utils';
 
 import './Registration.css';
 
-export default class Regesrtration extends Component {
+class Regesrtration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,28 +21,26 @@ export default class Regesrtration extends Component {
   }
 
   handleChange = (e) => {
-    const event = e
+    const form = document.querySelector('.registration').elements;
     const injectErr = 'Pleas don`t hack this site';
     const name = e.target.name;
     const value = e.target.value;
     this.setState({...this.state, [name]: value},
-      (event)=>{
-        console.log(e)
+      ()=>{
         this.isPaswordsEqual()
           if (value.length > 3) {
             if (this.stringContainsInject(value)) {
               printErr(injectErr);
-              e.target.className = 'registration__input invalid';
+              form[name].className = 'registration__input invalid';
             } else if (value.length < 4) {
-              e.target.className = 'registration__input invalid';
+              form[name].className = 'registration__input invalid';
             } else {
-              e.target.className = 'registration__input';
+              form[name].className = 'registration__input valid';
             }
           } else if (value.length > 0) {
-            e.target.className = 'registration__input invalidLength';
+            form[name].className = 'registration__input invalidLength';
           }
         })
-        console.log(this.state)
   }
 
   linkToLogin = () => {
@@ -90,7 +91,7 @@ export default class Regesrtration extends Component {
   render() {
     return (
       <main>
-        <form className="registration">
+        <form onSubmit={this.createUser} className="registration">
           <h1 className="registration__title">Create new account</h1>
           <input
             className="registration__input"
@@ -124,21 +125,34 @@ export default class Regesrtration extends Component {
             value={this.state.confirmPass}
             placeholder="confirm password"
           />
+          <p
+            className="registration__pass-err-test"
+            hidden={(this.state.pass.length < 1 || this.state.confirmPass.length < 1) || this.state.passwordIsEqual }>
+            Passwords do not match
+          </p>
           <input
             className="registration__create-button"
-            type="button"
+            type="submit"
             value="Create account"
             disabled={!this.state.formIsDone}
-            onClick={this.createUser}
           />
-          <input
+          <Link
+            to="/login"
             className="registration__to-login-button"
-            type="button"
-            value="Sing in"
-            onClick={this.linkToLogin}
-          />
+          >
+            Sing in
+          </Link>
         </form>
       </main>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  registration: state.registration
+})
+
+export default connect(
+  mapStateToProps
+  ,null
+)(Regesrtration)

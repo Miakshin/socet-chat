@@ -4,6 +4,7 @@
   "private": true,
   "description": "simple chat created in socet.io and express\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dkcet.io and express",
   "scripts": {
+    "eslint": "./node_modules/.bin/eslint",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -15,12 +16,18 @@
     "body-parser": "1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "history": "^4.7.2",
     "mongoose": "^5.0.17",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "^1.1.4",
+    "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0"
   },
@@ -35,6 +42,7 @@
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
     "nodemon": "^1.17.3",
     "react-scripts": "^1.1.4"
   }
