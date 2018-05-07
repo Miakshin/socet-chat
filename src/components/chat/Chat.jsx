@@ -7,17 +7,41 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      socket: io(),
-      messages: []
+      socket: io(`http://localhost:3040?user-name=${window.localStorage.getItem("name")}`),
+      messages: [],
+      text: '',
     };
+  }
+
+  onTextChange = (e) => {
+    this.setState({text: e.target.value})
   }
 
   componentDidMount() {
     this.state.socket.on('chat message', (msg) => {
-      this.setState(
-        { messages : [ ...this.state.messages , msg] }
-      )
+      this.setState({ messages: [...this.state.messages, msg] });
     });
+    this.state.socket.emit('user joined', window.localStorage.getItem("name"))
+    this.state.socket.on('user joined', (name) => {
+      const message = {
+        className: 'connect-message',
+        text: `${name} is joined to chat`
+      }
+      this.setState({ messages: [...this.state.messages, message] });
+    });
+    this.state.socket.on('user disconnected', (name) => {
+      const message = {
+        className: 'disconnect-message',
+        text: `${name} is lived chat`
+      }
+      this.setState({ messages: [...this.state.messages, message] });
+    });
+  }
+
+  componentWillUnmount() {
+    const user =  window.localStorage.getItem("name");
+    this.state.socket.emit('user disconnected', user)
+    this.state.socket.disconnect()
   }
 
   exit() {
@@ -25,19 +49,22 @@ class Chat extends Component {
     this.props.history.push('/');
   }
 
-  sendMesage() {
+  sendMesage = (e) => {
+    e.preventDefault();
     const message = document.querySelector('.mesage-form__text').value;
+    const messageData = {
+      user: window.localStorage.getItem("name"),
+      userId: window.localStorage.getItem("id"),
+      text: this.state.text
+    }
     this.state.socket.emit('chat message', message);
-    document.querySelector('.mesage-form__text').value = '';
+    this.setState({text: ''})
   }
 
   render() {
-
-    const messageList = this.state.messages.map((item, i) => {
-      return (
-        <li className="chat__message" key={i}>{item}</li>
-      )
-    })
+    const messageList = this.state.messages.map((item, i) => (
+      <li className="chat__message" key={i}>{item}</li>
+    ));
 
     return (
       <div className="chat">
@@ -46,21 +73,25 @@ class Chat extends Component {
             type="button"
             value="exit"
             className="chat__out-btn"
-            onClick={()=>this.exit()}
+            onClick={() => this.exit()}
           />
         </header>
         <ul className="chat__messages" >
-          {messageList || " "}
+          {messageList || ' '}
         </ul>
-        <form className="mesage-form">
+        <form
+          className="mesage-form"
+          onSubmit={this.sendMesage}
+        >
           <input
             type="text"
             className="mesage-form__text"
+            onChange={this.onTextChange}
+            value={this.state.text}
           />
           <input
-            type="button"
+            type="submit"
             value="send"
-            onClick={() => this.sendMesage()}
           />
         </form>
       </div>

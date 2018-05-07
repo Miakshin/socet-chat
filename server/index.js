@@ -32,18 +32,18 @@ app.post('/user/check-login', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  let user = socket.handshake.query.user;
+  socket.on('user joined', (name) => {
+    io.emit('user joined', name);
   });
-});
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
+  socket.on('chat message', (msgObj) => {
+    io.emit('chat message', msgObj);
   });
-});
-
+  socket.on('disconnect', (userName) => {
+    io.emit('user disconnected', userName)
+    console.log(`${userName} disconnected`);
+  });
+})
 
 http.listen(
   port, '127.0.0.1',
