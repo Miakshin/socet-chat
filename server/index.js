@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const http = require('http').Server(app);
-const path = require('path');
 const bodyParser = require('body-parser');
 const io = require('socket.io')(http);
 const dbUtils = require('./db/utils/index');
@@ -12,18 +11,19 @@ const userUtils = require('./db/utils/userUtils');
 const port = 3040;
 
 dbUtils.setUpConnection();
+app.use(cors());
 app.options('*', cors());
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.end('index')
+  res.end('index');
 });
 
 app.post('/user/create', (req, res) => {
   userUtils.createUser(req.body)
-    .then( respData  => res.send(respData._id))
+    .then(respData => res.send(respData._id));
 });
 
 io.on('connection', (socket) => {
@@ -32,9 +32,9 @@ io.on('connection', (socket) => {
   });
 });
 
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
   console.log('a user connected');
-  socket.on('disconnect', function(){
+  socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
