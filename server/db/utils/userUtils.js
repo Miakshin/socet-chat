@@ -1,14 +1,27 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var User = require('../models/userSchema');
+const User = require('../models/userSchema');
 
 module.exports.createUser = function (data) {
-
-  var user = new User({
+  const user = new User({
     login: data.login,
     password: data.password,
     name: data.name,
   });
 
-    return user.save();
-}
+  return user.save();
+};
+
+module.exports.checkUserMatch = function (data) {
+  return new Promise((resolve, reject) => {
+    resolve(User.findOne({ login: data.login }));
+  })
+    .then((user) => {
+      if (user) {
+        return user.password === data.pass ?
+          { id: user._id, name: user.name } :
+          false;
+      }
+      return false;
+    });
+};

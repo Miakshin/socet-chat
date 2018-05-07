@@ -21,6 +21,7 @@ class Chat extends Component {
   }
 
   exit() {
+    window.localStorage.clear();
     this.props.history.push('/');
   }
 

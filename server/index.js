@@ -26,6 +26,11 @@ app.post('/user/create', (req, res) => {
     .then(respData => res.send(respData._id));
 });
 
+app.post('/user/check-login', (req, res) => {
+  userUtils.checkUserMatch(req.body)
+    .then(answer => res.send(answer));
+});
+
 io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     io.emit('chat message', msg);

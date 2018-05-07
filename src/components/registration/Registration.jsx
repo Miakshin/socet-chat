@@ -60,6 +60,7 @@ const Regesrtration = (props) => {
         window.localStorage.setItem('id', id);
         window.localStorage.setItem('name', name);
         props.history.push('/chat');
+        props.reset();
       })
       .catch(() => printErr(errMessage));
   };

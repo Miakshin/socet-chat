@@ -1,28 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import './Login.css';
 
-const Login = props => (
-  <main>
-    <form className="login">
-      <h1 className="login__title">Login</h1>
-      <input className="login__input" type="text" name="login" placeholder="Login" />
-      <input className="login__input" type="password" name="pass" placeholder="password" />
-      <input
-        className="login__button"
-        type="button"
-        value="login"
-        onClick={() => {
-          props.history.push('/chat');
-        }}
-      />
-      <p className="login__hint">
-        Don't have a account?
-        <Link className="login__reg-link" to="/registration">Registration</Link>
-      </p>
-    </form>
-  </main>
-);
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: '',
+      pass: '',
+      loading: false,
+      passErr: false
+    };
+  }
 
-export default Login;
+  onLoginChange = (e) => {
+    this.setState({login : e.target.value})
+  }
+  onPassChange = (e) => {
+    this.setState({pass : e.target.value})
+  }
+  login = () => {
+    console.log(this.state)
+    this.setState({loading : true});
+    axios.post('http://localhost:3040/user/check-login',{
+      login: this.state.login,
+      pass: this.state.pass
+    })
+    .then(res=>{
+      this.setState({loading : false});
+      console.log(res.data)
+      if(res.data){
+        window.localStorage.setItem('id', res.data.id);
+        window.localStorage.setItem('name', res.data.name)
+        this.props.history.push('/chat')
+      }else{
+        this.setState({passErr : true})
+      }
+    })
+  }
+
+  render() {
+    return (
+      <main>
+        <form className="login">
+          <h1 className="login__title">Login</h1>
+          <input
+            className="login__input"
+            type="text"
+            name="login"
+            placeholder="Login"
+            onChange={this.onLoginChange}
+          />
+          <input
+            className="login__input"
+            type="password"
+            name="pass"
+            placeholder="password"
+            onChange={this.onPassChange}
+          />
+          <input
+            disabled ={(this.state.login.length < 3  || this.state.pass.length < 3)}
+            className="login__button"
+            type="button"
+            value="login"
+            onClick={this.login}
+          />
+          <p className="login__hint">
+            Don't have a account?
+            <Link className="login__reg-link" to="/registration">Registration</Link>
+          </p>
+        </form>
+      </main>
+    );
+  }
+}

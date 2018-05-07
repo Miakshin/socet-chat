@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var url = "mongodb://foo:bar@ds115420.mlab.com:15420/chat-db";
+const url = 'mongodb://foo:bar@ds115420.mlab.com:15420/chat-db';
 
-module.exports.setUpConnection =  function setUpConnection() {
+module.exports.setUpConnection = function setUpConnection() {
   mongoose.connect(url);
-  console.log("Succes connection");
-}
+  console.log('Succes connection');
+};

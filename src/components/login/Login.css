@@ -44,6 +44,14 @@ main{
   height: 40px;
   background-color: #3498db;
   color: #ffffff;
+  cursor: pointer;
+}
+.login__button:disabled{
+  background-color: #3498db94;
+}
+.login__button:active{
+  position: relative;
+  top:2px;
 }
 .login__hint{
   display: block;
