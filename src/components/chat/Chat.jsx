@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import ChatMessage from './chatMessage/ChatMessage'
+import ChatMessage from './chatMessage/ChatMessage';
+import FriendsFrame from './friendsFrame/FriendsFrame';
 
 import './Chat.css';
 
@@ -11,7 +12,8 @@ class Chat extends Component {
       socket: io(`http://localhost:3040?user-name=${window.localStorage.getItem("name")}`),
       messages: [],
       text: '',
-      currentUser: window.localStorage.getItem("name")
+      currentUser: window.localStorage.getItem("name"),
+      friends: [],
     };
   }
 
@@ -80,9 +82,12 @@ class Chat extends Component {
             onClick={() => this.exit()}
           />
         </header>
-        <ul className="chat__messages" >
-          {messageList || ' '}
-        </ul>
+        <main className="chat__main">
+          <ul className="chat__messages" >
+            {messageList}
+          </ul>
+          <FriendsFrame friends={[]}/>
+        </main>
         <form
           className="mesage-form"
           onSubmit={this.sendMesage}
