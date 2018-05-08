@@ -10,6 +10,7 @@ class Chat extends Component {
       socket: io(`http://localhost:3040?user-name=${window.localStorage.getItem("name")}`),
       messages: [],
       text: '',
+      currentUser: window.localStorage.getItem("name")
     };
   }
 
@@ -21,26 +22,25 @@ class Chat extends Component {
     this.state.socket.on('chat message', (msg) => {
       this.setState({ messages: [...this.state.messages, msg] });
     });
-    this.state.socket.emit('user joined', window.localStorage.getItem("name"))
+    this.state.socket.emit('user joined', this.state.currentUser)
     this.state.socket.on('user joined', (name) => {
-      const message = {
-        className: 'connect-message',
+      const messageData = {
+        type: 'connect-message',
         text: `${name} is joined to chat`
       }
-      this.setState({ messages: [...this.state.messages, message] });
+      this.setState({ messages: [...this.state.messages, messageData] });
     });
-    this.state.socket.on('user disconnected', (name) => {
-      const message = {
-        className: 'disconnect-message',
+    this.state.socket.on('user disconnect', (name) => {
+      const messageData = {
+        type: 'disconnect-message',
         text: `${name} is lived chat`
       }
-      this.setState({ messages: [...this.state.messages, message] });
+      this.setState({ messages: [...this.state.messages, messageData] });
     });
   }
 
   componentWillUnmount() {
-    const user =  window.localStorage.getItem("name");
-    this.state.socket.emit('user disconnected', user)
+    this.state.socket.emit('user disconnect', this.state.currentUser)
     this.state.socket.disconnect()
   }
 
@@ -53,17 +53,18 @@ class Chat extends Component {
     e.preventDefault();
     const message = document.querySelector('.mesage-form__text').value;
     const messageData = {
-      user: window.localStorage.getItem("name"),
+      type: 'user-mesasge',
+      userName: window.localStorage.getItem("name"),
       userId: window.localStorage.getItem("id"),
       text: this.state.text
     }
-    this.state.socket.emit('chat message', message);
+    this.state.socket.emit('chat message', messageData);
     this.setState({text: ''})
   }
 
   render() {
     const messageList = this.state.messages.map((item, i) => (
-      <li className="chat__message" key={i}>{item}</li>
+      <li className="chat__message" key={i}>{item.text}</li>
     ));
 
     return (

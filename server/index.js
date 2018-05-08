@@ -39,9 +39,11 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msgObj) => {
     io.emit('chat message', msgObj);
   });
-  socket.on('disconnect', (userName) => {
-    io.emit('user disconnected', userName)
-    console.log(`${userName} disconnected`);
+  socket.on('user disconnect', (userName) =>{
+    io.emit('user disconnect', userName);
+  });
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
   });
 })
 
