@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
+import ChatMessage from './chatMessage/ChatMessage'
 
 import './Chat.css';
 
@@ -56,7 +57,8 @@ class Chat extends Component {
       type: 'user-mesasge',
       userName: window.localStorage.getItem("name"),
       userId: window.localStorage.getItem("id"),
-      text: this.state.text
+      text: this.state.text,
+      sendAt: Date.now()
     }
     this.state.socket.emit('chat message', messageData);
     this.setState({text: ''})
@@ -64,7 +66,7 @@ class Chat extends Component {
 
   render() {
     const messageList = this.state.messages.map((item, i) => (
-      <li className="chat__message" key={i}>{item.text}</li>
+      <ChatMessage key={i} data={item}/>
     ));
 
     return (
