@@ -36,6 +36,7 @@ class Chat extends Component {
         type: 'disconnect-message',
         text: `${name} is lived chat`
       }
+      console.log(messageData)
       this.setState({ messages: [...this.state.messages, messageData] });
     });
   }

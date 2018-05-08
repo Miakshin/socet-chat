@@ -1,0 +1,47 @@
+.my-message,
+.message,
+.system-message{
+  width: 100%;
+  min-height: 40px;
+  color:#757476;
+  position: relative;
+  text-indent: 20px;
+  display: flex;
+}
+.system-message{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.message__name{
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+time{
+  width: 10%;
+  color:silver;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.message__text{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.my-message{
+  background-color: #c9e5f7;
+}
+.message{
+  background-color: #ecf0f1;
+}
+.system-message{
+  background-color: #ffffff;
+}
