@@ -1,0 +1,28 @@
+.modal{
+  background-color: #c9e5f7;
+  box-shadow: 1px 2px 8px silver;
+}
+.modal__menu{
+  list-style-type: none;
+  color:#757476;
+  cursor: pointer;
+}
+.modal-wrapper{
+  background-color: #ffffff00;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top:0;
+  left:0;
+}
+[class^="modal__item"]:hover{
+  background-color: #3498db;
+  color: #ffffff;
+}
+[class^="modal__item"]{
+  height: 25px;
+  width: 124px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

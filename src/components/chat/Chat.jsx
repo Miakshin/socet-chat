@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import ChatMessage from './chatMessage/ChatMessage';
 import FriendsFrame from './friendsFrame/FriendsFrame';
+import ModalWindow from './modalWindow/ModalWindow';
 
 import './Chat.css';
 
@@ -103,6 +104,7 @@ class Chat extends Component {
             value="send"
           />
         </form>
+        <ModalWindow />
       </div>
     );
   }

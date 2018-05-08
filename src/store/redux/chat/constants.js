@@ -1,0 +1,2 @@
+export const UPDATE_COORDINATS = 'UPDATE_COORDINATS';
+export const CLOSE_MODAL = 'CLOSE_MODAL';

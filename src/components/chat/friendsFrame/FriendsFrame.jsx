@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './FriendsFrame.css'
 
@@ -26,6 +27,10 @@ const FriendsFrame = (props) => {
       </ul>
     </asside>
   )
+}
+
+FriendsFrame.propTypes ={
+  friends: PropTypes.array,
 }
 
 export default FriendsFrame
