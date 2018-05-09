@@ -1,11 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../../store/redux/chat/actions';
+import * as chatActions from '../../../store/redux/chat/actions';
+import * as userActions from '../../../store/redux/user/actions';
+import axios from 'axios';
 
 import './ModalWindow.css'
 
 const ModalWindow = (props) => {
+
+  const addUserToFriends = () => {
+    const data = {
+      id: props.user.id || window.localStorage.getItem("id"),
+      target: props.chat.target
+    }
+    console.log(data)
+    axios.post('http://localhost:3040/user/add-to-fiends', data)
+      .then((answer) =>{
+        console.log(answer.data)
+        props.updateUserFriends(answer.data)})
+      .catch(console.log)
+  }
 
   const catchClick = (e) => {
     switch(e.target.className){
@@ -13,7 +28,7 @@ const ModalWindow = (props) => {
         props.closeModal()
         break
       case "modal__item_add":
-        console.log("add")
+        addUserToFriends();
         break
       case "modal__item_privat":
         console.log("private")
@@ -43,10 +58,13 @@ const ModalWindow = (props) => {
 
 const mapStateToProps = state => ({
   chat: state.chat,
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  closeModal: () => actions.closeModal()
+  closeModal: () => chatActions.closeModal(),
+    updateUser: user => userActions.updateUser(user),
+    updateUserFriends: friends => userActions.updateUserFriends(friends)
 }, dispatch);
 
 export default connect(

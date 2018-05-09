@@ -9,8 +9,11 @@ import './ChatMessage.css';
 
 const ChatMessage = (props) => {
   const click = (e) => {
-    console.log(e.clientY, e.clientX);
-    props.updateCoordinats(e.clientY, e.clientX);
+    const targetObj={
+      name: e.target.dataset.name,
+      id: e.target.dataset.id
+    }
+    props.updateCoordinats(e.clientY, e.clientX, targetObj);
   };
 
   switch (props.data.type) {
@@ -28,7 +31,9 @@ const ChatMessage = (props) => {
       return (
         <div className="message">
           <span
-            className="message__name"
+            data-name={props.data.userName}
+            data-id={props.data.userId}
+            className="message__name link"
             onClick={click}
           >{props.data.userName}
           </span>
@@ -64,7 +69,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateCoordinats: (y, x) => actions.updateCoordinats(y, x),
+  updateCoordinats: (y, x, target) => actions.updateCoordinats(y, x, target),
 }, dispatch);
 
 export default connect(

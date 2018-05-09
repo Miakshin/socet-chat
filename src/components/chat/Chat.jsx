@@ -87,7 +87,7 @@ class Chat extends Component {
           <ul className="chat__messages" >
             {messageList}
           </ul>
-          <FriendsFrame friends={[]}/>
+          <FriendsFrame />
         </main>
         <form
           className="mesage-form"

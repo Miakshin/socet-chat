@@ -19,7 +19,10 @@ module.exports.checkUserMatch = function (data) {
     .then((user) => {
       if (user) {
         return user.password === data.pass ?
-          { id: user._id, name: user.name } :
+          { id: user._id,
+            name: user.name,
+            login: user.login,
+            friends: user.friends} :
           false;
       }
       return false;
@@ -27,10 +30,12 @@ module.exports.checkUserMatch = function (data) {
 };
 
 module.exports.addToFriedns = function (currentUserId, target) {
-  User.findById(currentUserId,(err,user)=>{
-    if(err){ return(err) };
-    user.friends = [...User.friends, target];
-    user.save()
-    return user
+  return new Promise((resolve, reject) => {
+    User.findById(currentUserId, (err, user) => {
+      if (err) { reject(err) }
+      user.friends = [...user.friends, target];
+      user.save();
+      resolve(user.friends);
+    });
   })
 };

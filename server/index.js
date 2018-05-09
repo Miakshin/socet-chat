@@ -31,27 +31,27 @@ app.post('/user/check-login', (req, res) => {
     .then(answer => res.send(answer));
 });
 
-app.post('/user/add-to-fiends', (req,res) => {
-  addToFriedns(req.body.userId, req.body.target)
-    .then(answer => res.send(answer))
-})
+app.post('/user/add-to-fiends', (req, res) => {
+  userUtils.addToFriedns(req.body.id, req.body.target)
+    .then(answer => res.send(answer));
+});
 
 io.on('connection', (socket) => {
-  let user = socket.handshake.query.user;
+  const user = socket.handshake.query.user;
   socket.on('user joined', (name) => {
     io.emit('user joined', name);
   });
   socket.on('chat message', (msgObj) => {
     io.emit('chat message', msgObj);
   });
-  socket.on('user disconnect', (userName) =>{
+  socket.on('user disconnect', (userName) => {
     console.log(userName);
     io.emit('user disconnect', userName);
   });
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    console.log('user disconnected');
   });
-})
+});
 
 http.listen(
   port, '127.0.0.1',

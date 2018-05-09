@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import axios from 'axios';
+import * as actions from '../../store/redux/user/actions';
 
 import './Login.css';
 
-export default class Login extends Component {
+ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,11 +33,11 @@ export default class Login extends Component {
     })
     .then(res=>{
       this.setState({loading : false});
-      console.log(res.data)
       if(res.data){
         window.localStorage.setItem('id', res.data.id);
-        window.localStorage.setItem('name', res.data.name)
-        this.props.history.push('/chat')
+        window.localStorage.setItem('name', res.data.name);
+        this.props.updateUser(res.data);
+        this.props.history.push('/chat');
       }else{
         this.setState({passErr : true})
       }
@@ -76,3 +79,16 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  updateUser: user => actions.updateUser(user)
+}, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);

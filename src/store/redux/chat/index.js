@@ -4,6 +4,7 @@ import {
 } from './constants';
 
 const initialState = {
+  target: {},
   top: '99999',
   left: '99999',
   isOpened: false,
@@ -15,7 +16,8 @@ export default (state = initialState, action) => {
       return {
         top: action.top,
         left: action.left,
-        isOpened: true
+        target: action.target,
+        isOpened: true,
       };
     case CLOSE_MODAL:
       return initialState;

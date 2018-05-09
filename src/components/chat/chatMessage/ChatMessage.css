@@ -46,3 +46,6 @@ time{
 .system-message{
   background-color: #ffffff;
 }
+.link{
+  cursor:pointer;
+}
