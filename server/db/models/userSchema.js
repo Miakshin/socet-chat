@@ -7,7 +7,8 @@ var UsersSchema = new Schema({
   name: String,
   friends:
     [
-      { id: String }
+      { id: String,
+        name: String }
     ]
   });
 

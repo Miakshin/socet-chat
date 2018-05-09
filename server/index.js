@@ -31,6 +31,11 @@ app.post('/user/check-login', (req, res) => {
     .then(answer => res.send(answer));
 });
 
+app.post('/user/add-to-fiends', (req,res) => {
+  addToFriedns(req.body.userId, req.body.target)
+    .then(answer => res.send(answer))
+})
+
 io.on('connection', (socket) => {
   let user = socket.handshake.query.user;
   socket.on('user joined', (name) => {

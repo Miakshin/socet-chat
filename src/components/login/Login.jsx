@@ -68,7 +68,7 @@ export default class Login extends Component {
             onClick={this.login}
           />
           <p className="login__hint">
-            Don't have a account?
+            Don't have an account?<br />
             <Link className="login__reg-link" to="/registration">Registration</Link>
           </p>
         </form>

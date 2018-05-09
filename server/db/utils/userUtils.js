@@ -25,3 +25,12 @@ module.exports.checkUserMatch = function (data) {
       return false;
     });
 };
+
+module.exports.addToFriedns = function (currentUserId, target) {
+  User.findById(currentUserId,(err,user)=>{
+    if(err){ return(err) };
+    user.friends = [...User.friends, target];
+    user.save()
+    return user
+  })
+};
