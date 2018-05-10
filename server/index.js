@@ -33,7 +33,13 @@ app.post('/user/check-login', (req, res) => {
 
 app.post('/user/add-to-fiends', (req, res) => {
   userUtils.addToFriedns(req.body.id, req.body.target)
-    .then(answer => res.send(answer));
+    .then(answer => res.send(answer))
+});
+
+app.get('/user/:id', (req, res) => {
+  userUtils.getUserById(req.params.id)
+    .then(user => res.send(user))
+    .catch(err => res.sendStatus(500))
 });
 
 io.on('connection', (socket) => {

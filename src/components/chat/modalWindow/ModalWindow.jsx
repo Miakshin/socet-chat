@@ -28,7 +28,8 @@ const ModalWindow = (props) => {
         props.closeModal()
         break
       case "modal__item_add":
-        addUserToFriends();
+        addUserToFriends()
+        props.closeModal()
         break
       case "modal__item_privat":
         console.log("private")

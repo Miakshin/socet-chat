@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import './FriendsFrame.css';
@@ -13,7 +12,7 @@ const FriendsFrame = (props) => {
       );
     }
     return (
-      props.friends.map(friend => (
+      props.user.friends.map(friend => (
         <li className="friends-frame__friend">{friend.name}</li>
       ))
     );
@@ -32,6 +31,7 @@ const FriendsFrame = (props) => {
 
 FriendsFrame.propTypes = {
   friends: PropTypes.array,
+  user: PropTypes.object,
 };
 
 

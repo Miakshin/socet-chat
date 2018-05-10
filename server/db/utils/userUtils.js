@@ -39,3 +39,17 @@ module.exports.addToFriedns = function (currentUserId, target) {
     });
   })
 };
+
+module.exports.getUserById = function (id) {
+  return new Promise((resolve, reject) => {
+    User.findById(id, (err, user) => {
+      if (err) { reject(err) }
+      resolve({
+        name: user.name,
+        id: user.id,
+        friends: user.friends,
+        login: user.login
+      })
+    })
+  })
+}

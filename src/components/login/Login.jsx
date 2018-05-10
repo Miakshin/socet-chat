@@ -16,32 +16,32 @@ import './Login.css';
       loading: false,
       passErr: false
     };
-  }
+    this.onLoginChange = (e) => {
+      this.setState({login : e.target.value})
+    }
+    this.onPassChange = (e) => {
+      this.setState({pass : e.target.value})
+    }
+    this.login = () => {
+      console.log(this.state)
+      this.setState({loading : true});
+      axios.post('http://localhost:3040/user/check-login',{
+        login: this.state.login,
+        pass: this.state.pass
+      })
+      .then(res=>{
+        this.setState({loading : false});
+        if(res.data){
+          window.localStorage.setItem('id', res.data.id);
+          window.localStorage.setItem('name', res.data.name);
+          this.props.updateUser(res.data);
+          this.props.history.push('/chat');
+        }else{
+          this.setState({passErr : true})
+        }
+      })
+    }
 
-  onLoginChange = (e) => {
-    this.setState({login : e.target.value})
-  }
-  onPassChange = (e) => {
-    this.setState({pass : e.target.value})
-  }
-  login = () => {
-    console.log(this.state)
-    this.setState({loading : true});
-    axios.post('http://localhost:3040/user/check-login',{
-      login: this.state.login,
-      pass: this.state.pass
-    })
-    .then(res=>{
-      this.setState({loading : false});
-      if(res.data){
-        window.localStorage.setItem('id', res.data.id);
-        window.localStorage.setItem('name', res.data.name);
-        this.props.updateUser(res.data);
-        this.props.history.push('/chat');
-      }else{
-        this.setState({passErr : true})
-      }
-    })
   }
 
   render() {
