@@ -1,9 +1,9 @@
 export const printErr = (text) => {
-  if (!document.querySelector('.err')) {
+  if (!document.querySelector('._err')) {
     const div = document.createElement('div');
     const target = document.querySelector('body');
 
-    div.className = 'err';
+    div.className = '_err';
     div.textContent = text;
     target.insertBefore(div, document.querySelector('#root'));
 
