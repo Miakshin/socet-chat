@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -59,7 +59,7 @@ const Regesrtration = (props) => {
       .then(({ id, name }) => {
         window.localStorage.setItem('id', id);
         window.localStorage.setItem('name', name);
-        props.history.push('/chat');
+        push('/chat');
         props.reset();
       })
       .catch(() => printErr(errMessage));
@@ -89,7 +89,7 @@ const Regesrtration = (props) => {
   };
 
   const linkToLogin = () => {
-    props.history.push('/login');
+    push('/login');
   };
 
   return (
