@@ -1,14 +1,21 @@
 import Login from '../components/login/Login';
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import axios from 'axios';
-// import * as actions from '../store/redux/user/actions';
-import { mount } from 'enzyme';
+import configureStore from 'redux-mock-store'
+import { shallow } from 'enzyme';
 
-test('Login was created and inputs is empty', () => {
-  const component = mount(<Login/>);
-  const loginInput = component.find('.login__input');
-  expect(loginInput.value()).toEqual('');
-});
+const initialState = {output:100}
+const mockStore = configureStore()
+let store,component;
+
+beforeEach(()=>{
+    store = mockStore(initialState)
+    component = shallow(<Login store={store} /> )
+})
+
+describe('Login component', ()=>{
+  it('Login was created and inputs is empty', () => {
+    const loginInput = component.find('login');
+    console.log(loginInput)
+    expect(loginInput.length).toEqual(0);
+  })
+})
