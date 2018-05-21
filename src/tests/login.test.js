@@ -1,5 +1,5 @@
 import Login from '../components/login/Login';
-import React, { Component } from 'react';
+import React from 'react';
 import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -14,8 +14,7 @@ const user = {
   confirmPass: '12341234',
 };
 
-const mockStore = configureStore();
-  let component;
+let component;
 
 beforeEach(() => {
   component = shallow(
